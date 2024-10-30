@@ -30,5 +30,5 @@ dev = [
 include = ["impc_api", "impc_api.*"]
 
 [project.urls]
-"Homepage" = "https://github.com/mpi2/impc-data-api-workshop"
+"Homepage" = "https://github.com/mpi2/impc-api"
 
