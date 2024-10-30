@@ -7,7 +7,7 @@ The functions in this package are intended for use in a Jupyter Notebook.
 ## Installation Instructions
 
 1. **Create a virtual environment (optional but recommended)**:
-On Mac:
+On Mac or Linux:
  ```bash
  python3 -m venv .venv
  source .venv/bin/activate
@@ -105,7 +105,7 @@ num_found, df = solr_request(
 
 Use `batch_solr_request` for:
 
-- Large queries (>1,000,000)
+- Large queries (>100,000 rows)
 - Querying multiple items in a list
 - Downloading data in `json` or `csv` format.
 
