@@ -14,12 +14,11 @@ On Mac:
  ```
 
 2. **Install the package**: `pip install impc_api`
-3. **Install Jupyter**: `pip install jupyter`
-4. **Run the Jupyter Notebook**: `jupyter notebook`
+3. **Run the Jupyter Notebook**: `jupyter notebook`
 
 After executing the command, the Jupyter interface should open in your browser. If it does not, follow the instructions provided in the terminal.
 
-5. **Try it out**:
+4. **Try it out**:
 
 Create a [Jupyter Notebook](https://jupyter-notebook.readthedocs.io/en/latest/) and try some of the examples below:
 
