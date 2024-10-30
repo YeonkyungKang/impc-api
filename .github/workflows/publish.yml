@@ -3,6 +3,9 @@ name: Upload Python Package to PyPI when a Release is Created
 on:
   release:
     types: [created]
+  push:
+    branches:
+      - simplify-build
 
 jobs:
   pypi-publish:
@@ -22,9 +25,9 @@ jobs:
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
-          pip install setuptools wheel
+          pip install build
       - name: Build package
         run: |
-          python3 setup.py sdist bdist_wheel 
+          python3 -m build 
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
