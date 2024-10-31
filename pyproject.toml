@@ -12,7 +12,8 @@ authors = [
     { name = "Diego Pava" }
 ]
 dependencies = [
-    "jupyter>=1.1.1",
+    "ipython>=8.29.0",
+    "notebook>=7.2.3",
     "pandas>=2.2.0",
     "requests>=2.31.0",
     "tqdm>=4.66.4",
