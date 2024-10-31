@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "impc_api"
-version = "1.0.5"
+version = "1.0.6"
 description = "A package to facilitate making API requests to the IMPC Solr API"
 authors = [
     { name = "MPI2" },
@@ -30,5 +30,5 @@ dev = [
 include = ["impc_api", "impc_api.*"]
 
 [project.urls]
-"Homepage" = "https://github.com/mpi2/impc-data-api-workshop"
+"Homepage" = "https://github.com/mpi2/impc-api"
 
