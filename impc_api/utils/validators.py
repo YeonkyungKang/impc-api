@@ -93,7 +93,7 @@ class CoreParamsValidator(BaseModel):
         # Validate each field in params
         if invalid_core is not True:
             for fl in field_list:
-                if fl not in jv.valid_fields(core):
+                if fl.strip() not in jv.valid_fields(core):
                     warnings.warn(
                         message=f"""Unexpected field name: "{fl}". Check the spelling of fields.\nTo see expected fields check the documentation at: https://www.ebi.ac.uk/mi/impc/solrdoc/""",
                         category=InvalidFieldWarning,

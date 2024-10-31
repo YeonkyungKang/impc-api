@@ -4,6 +4,7 @@ from impc_api.utils.warnings import InvalidCoreWarning, InvalidFieldWarning
 from solr_request import solr_request, _process_faceting
 from .test_helpers import check_url_status_code_and_params
 
+
 class TestSolrRequest:
     """Test class for the Solr Request function
 
@@ -316,3 +317,19 @@ class TestSolrRequest:
                 params={"q": "*:*", "fl": "invalid_field,another_invalid_field"},
                 validate=True,
             )
+
+    @pytest.mark.parametrize(
+        "mock_response", [_validation_response()], indirect=["mock_response"]
+    )
+    def test_solr_request_fields_validation_spacing(self, common_params, mock_response):
+        try:
+            _ = solr_request(
+                core="experiment",
+                params={
+                    **common_params,
+                    "fl": "experiment_id, parameter_stable_id     ,       parameter_name",
+                },
+                validate=True,
+            )
+        except InvalidFieldWarning:
+            pytest.fail("InvalidFieldWarning raised when it shouldn't have been")
