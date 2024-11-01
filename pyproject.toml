@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "impc_api"
-version = "1.0.6"
+version = "1.0.7"
 description = "A package to facilitate making API requests to the IMPC Solr API"
 authors = [
     { name = "MPI2" },
@@ -12,6 +12,8 @@ authors = [
     { name = "Diego Pava" }
 ]
 dependencies = [
+    "ipykernel>=6.29.5",
+    "notebook>=7.2.2",
     "pandas>=2.2.0",
     "requests>=2.31.0",
     "tqdm>=4.66.4",

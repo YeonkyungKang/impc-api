@@ -1,25 +1,24 @@
 # IMPC_API
 
-`impc_api` is a Python package which provides several helper functions that wrap around the IMPC SOLR API.
-  
-The functions in this package are intended for use in a Jupyter Notebook.
+`impc_api` is a Python package which provides several helper functions that wrap around the IMPC SOLR API. The functions in this package are intended for use in a Jupyter Notebook.
 
 ## Installation Instructions
 
+0. Ensure that Python is installed on your system. The minimum required version is 3.10.
+
 1. **Create a virtual environment (optional but recommended)**:
-On Mac:
+On Mac or Linux:
  ```bash
  python3 -m venv .venv
  source .venv/bin/activate
  ```
 
 2. **Install the package**: `pip install impc_api`
-3. **Install Jupyter**: `pip install jupyter`
-4. **Run the Jupyter Notebook**: `jupyter notebook`
+3. **Run the Jupyter Notebook**: `jupyter notebook`
 
 After executing the command, the Jupyter interface should open in your browser. If it does not, follow the instructions provided in the terminal.
 
-5. **Try it out**:
+4. **Try it out**:
 
 Create a [Jupyter Notebook](https://jupyter-notebook.readthedocs.io/en/latest/) and try some of the examples below:
 
@@ -106,7 +105,7 @@ num_found, df = solr_request(
 
 Use `batch_solr_request` for:
 
-- Large queries (>1,000,000)
+- Large queries (>100,000 rows)
 - Querying multiple items in a list
 - Downloading data in `json` or `csv` format.
 
