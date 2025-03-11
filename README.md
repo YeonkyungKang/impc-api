@@ -79,7 +79,7 @@ num_found, df = solr_request(
     validate=True
 )
 
-> InvalidCoreWarning: Invalid core: "genotype-phenotyp", select from the available cores:
+> InvalidCoreWarning: Invalid core: "invalid_core", select from the available cores:
 > dict_keys(['experiment', 'genotype-phenotype', 'impc_images', 'phenodigm', 'statistical-result'])
 ```
 
