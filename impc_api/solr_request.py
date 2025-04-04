@@ -10,7 +10,7 @@ pd.set_option("display.max_rows", 15)
 pd.set_option("display.max_columns", None)
 
 # Create helper function
-def solr_request(core, params, silent=False, validate=False):
+def solr_request(core, params, silent=False, validate=False, url_only=False):
     """Performs a single Solr request to the IMPC Solr API.
 
     Args:
@@ -22,11 +22,22 @@ def solr_request(core, params, silent=False, validate=False):
         validate (bool, optional): default False
             If True, validates the parameters against the core schema and raises warnings
             if any parameter seems invalid.
+        url_only (bool, optional): default False
+            If true, returns the request URL but no data. 
 
 
     Returns:
-        num_found: Number of docs found.
-        pandas.DataFrame: Pandas.DataFrame object with the information requested.
+        Union[Tuple[int, pandas.DataFrame], Tuple[str, None]]:
+            - If url_only is False:
+                A tuple containing:
+                    num_found (int): Number of documents found.
+                    df (pandas.DataFrame): DataFrame object with the information requested.
+            
+            - If url_only is True:
+                A tuple containing:
+                    url (str): The URL of the request if status_code is 200, otherwise None.
+                    None: Placeholder for consistency.
+
 
     Example query:
         num_found, df = solr_request(
@@ -70,6 +81,16 @@ def solr_request(core, params, silent=False, validate=False):
     solr_url = base_url + core + "/select"
 
     response = requests.get(solr_url, params=params)
+
+    if url_only:
+        if response.status_code == 200:
+            print(response.request.url)
+            return response.request.url, None
+        else:
+            print(f"Error: {response.status_code}\n{response.text}")
+        return None, None
+
+
     if not silent:
         print(f"\nYour request:\n{response.request.url}\n")
 
