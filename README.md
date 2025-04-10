@@ -99,6 +99,26 @@ num_found, df = solr_request(
 > To see expected fields check the documentation at: https://www.ebi.ac.uk/mi/impc/solrdoc/
 ```
 
+## c. URL only
+
+Users might want help producing the URL to fetch the data without the need of a DataFrame. Use the flag `url_only=True` to print or return the URL for your query.
+
+```python
+url, _ = solr_request(
+    core='genotype-phenotype',
+    params={
+        'q': '*:*',
+        'rows': 10,
+        'fl': 'marker_symbol,allele_symbol'
+    },
+    url_only=True
+)
+> "https://www.ebi.ac.uk/mi/impc/solr/genotype-phenotype/select?q=%2A%3A%2A&rows=10&fl=marker_symbol%2Callele_symbol"
+
+print(url)
+> "https://www.ebi.ac.uk/mi/impc/solr/genotype-phenotype/select?q=%2A%3A%2A&rows=10&fl=marker_symbol%2Callele_symbol"
+```
+
 # 2. Batch Solr Request
 
 `batch_solr_request` is available for large queries. This solves issues where a request is too large to fit into memory or where it puts a lot of strain on the API.
