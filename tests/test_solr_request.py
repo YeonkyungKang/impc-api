@@ -333,3 +333,77 @@ class TestSolrRequest:
             )
         except InvalidFieldWarning:
             pytest.fail("InvalidFieldWarning raised when it shouldn't have been")
+
+    
+    @pytest.fixture
+    def test_url(self):
+        return "http://test.url/url_only"
+    
+    @pytest.fixture
+    def mock_response_url(self, request, test_url):
+        """
+        Fixture to mock the response from the Solr API
+
+        Args:
+            request (FixtureRequest): Request object provided by pytest containing the parameterized data
+
+        Yields:
+            MagicMock: A mock object "representing" the requests.get function used in solr_request.py.
+                        Its returned value is configured according to the parameterized data.
+        """
+        with patch("solr_request.requests.get") as mock_get:
+            mock_response = mock_get.return_value
+            mock_response.status_code = request.param.get("status_code")
+            mock_response.request.url = test_url
+            yield mock_get
+
+    @pytest.mark.parametrize(
+        "mock_response_url",
+        [
+            (
+                {
+                    "status_code": 200,
+                }
+            )
+        ],
+        indirect=True
+    )
+    def test_solr_request_url_only_success(self, core, common_params, capsys, mock_response_url, test_url):
+        # Assert when the params are status_code 200, the URL is printed and returned
+        url, _ = solr_request(
+            core=core,
+            params=common_params,
+            url_only=True
+        )
+        # Assert url is returned
+        assert url == test_url, f"Expected URL {test_url}, got {url}"
+        captured = capsys.readouterr()
+
+        # Assert test url is printed to console
+        assert test_url in captured.out, "Expected test URL to be printed on console output"
+
+    @pytest.mark.parametrize(
+        "mock_response_url",
+        [
+            (
+                {
+                    "status_code": 404,
+                }
+            )
+        ],
+        indirect=True
+    )
+    def test_solr_request_url_only_fail(self, core, common_params, capsys, mock_response_url, test_url):
+        # Assert that when status code is not 200, it returns None and the error message
+        url, _ = solr_request(
+            core=core,
+            params=common_params,
+            url_only=True
+        )
+        # Assert url is returned
+        assert url is None, "Expected no URL to be returned"
+        captured = capsys.readouterr()
+
+        # Assert test url is printed to console
+        assert "Error" in captured.out, "Expected error message to be printed in console output"
+
